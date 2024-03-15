@@ -3,6 +3,8 @@
 {% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+{% load crispy_forms_tags %}
+
 
 
 {% block head %} 
@@ -12,10 +14,10 @@
 
 
 {% block content %}
-    <div class="container-sm mb3 shadow-md">
-        <form class='form-control p-5 mb-3'  method='POST' autocomplete='off'>
+    <div class="container col-5 shadow-lg rounded-2 ">
+        <form class='form-control border border-0 col-3 p-5 '  method='POST' autocomplete='off'>
             {% csrf_token %}
-            {{RegistrationForm.as_p}}
+            {{RegistrationForm|crispy}}
             <button class="btn btn-dark" type='submit'>Create account</button>
         </form>
     </div>
