@@ -1,0 +1,29 @@
+{% extends 'tasks/base.html' %} 
+{% load django_bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+    {% block head %} 
+    <title>Task Heaven</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %} 
+    
+    
+    {% block content %}
+          <div class="text-center mb-5">
+            <h2>Task Heaven... A Heaven for your tasks</h2>
+            <h4>With us you can easily plan your life</h4>     
+            <br>
+            <p>At this moment Task UI requires an account.</p>
+            <p>With an account you an create, edit and delete tasks from everywhere.</p>
+            <p>You can also look at our <a href="{% url 'pricing' %}">Pro Version</a> if you need more advanced functions.<p> 
+          </div>
+          <div class="text-center mb-5">
+            <hr>
+            <p>Please login or register an account.</p>
+            <a class="btn btn-outline-dark" type="button"  href="{% url 'register' %}">Register</a>
+            <a class="btn btn-outline-success" type="button"  href="{% url 'login' %}">Login</a>
+          </div>
+    {% endblock %}

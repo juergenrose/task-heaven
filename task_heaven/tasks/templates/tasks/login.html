@@ -1,0 +1,21 @@
+{% extends 'tasks/base.html' %} 
+{% load django_bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block head %} 
+    <title>Task Heaven | Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %} 
+
+
+{% block content %}
+    <div class="container mb3">
+        <form class='form-control p-3 mb-5 text-center '  method='POST' autocomplete='off'>
+            {% csrf_token %}
+            {{ LoginForm.as_p }}
+            <button class="btn btn-success " type='submit'>Login</button
+        </form>
+    </div>
+{% endblock %}  

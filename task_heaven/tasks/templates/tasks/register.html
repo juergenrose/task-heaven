@@ -1,0 +1,22 @@
+{% extends 'tasks/base.html' %} 
+{% load django_bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+{% block head %} 
+<title>Task Heaven | Register</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %} 
+
+
+{% block content %}
+    <div class="container-sm mb3 shadow-md">
+        <form class='form-control p-5 mb-3'  method='POST' autocomplete='off'>
+            {% csrf_token %}
+            {{RegistrationForm.as_p}}
+            <button class="btn btn-dark" type='submit'>Create account</button>
+        </form>
+    </div>
+{% endblock %}
