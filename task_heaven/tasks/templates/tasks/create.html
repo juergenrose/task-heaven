@@ -14,11 +14,12 @@
 
 {% block content %}
 {{navbar}}
-<div class="container mb3 col-8 p-5 shadow-lg rounded-2">
+<div class="container mb3 col-8 p-5 shadow rounded-2 text-center">
 
-    <h2>Dashboard</h2>
-
-    <a href="{% url 'create' %}">Create new task</a>
-
+    <form class='form-control border border-0 col-3 p-5 ' method="POST" autocomplete="off">
+        {% csrf_token %}
+        {{ CreateTaskForm|crispy}}
+        <button class="btn btn-success " type='submit'>Create task</button
+    </form>
 </div>
 {% endblock %}
