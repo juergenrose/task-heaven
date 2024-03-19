@@ -1,0 +1,28 @@
+{% extends 'tasks/base.html' %} 
+{% load django_bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+
+{% block head %} 
+<title>Task Heaven | Dashboard</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %} 
+
+{% block content %}
+{{navbar}}
+
+
+<div class="container mb3 col-5 p-5 shadow rounded-2 text-center">
+    <h3>Delete account</h3>
+    <p>Are you sure that you want to delete your account?</p>
+    <form class='form-control border border-0 col-3 p-3 ' method="POST" autocomplete="off">
+        {% csrf_token %}
+        <button class="btn btn-danger " type='submit'>Delete account</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-dark " type='button'>Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

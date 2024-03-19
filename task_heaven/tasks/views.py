@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . forms import CreateUserForm, LoginForm, ContactForm, TaskForm, EditUserForm
+from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
@@ -23,7 +24,7 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Account has been successfully created") #Shows the messag when the register was successful
+            messages.success(request, "Account has been successfully created") #Shows the message when the register was successful
             return redirect('login')
     context = {'RegistrationForm' : form}
     return render(request, 'tasks/register.html', context)
@@ -144,3 +145,13 @@ def user_management(request):
             return redirect('dashboard')
     context = {'ProfileForm': form}
     return render(request, 'tasks/user-management.html', context)
+
+
+#delete user account
+@login_required(login_url='login')
+def delete_account(request):
+    if request.method == 'POST':
+        deleteUser = User.objects.get(username=request.user)
+        deleteUser.delete()
+        return redirect('home')
+    return render(request, 'tasks/delete-account.html')
