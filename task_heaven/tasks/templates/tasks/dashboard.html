@@ -14,11 +14,14 @@
 
 {% block content %}
 {{navbar}}
-<div class="container mb3 col-8 p-5 shadow-lg rounded-2">
+<div class="container mb3 col-8 p-5 text-center">
 
     <h2>Dashboard</h2>
-
-    <a href="{% url 'create' %}">Create new task</a>
+    <br>
+    <a href="{% url 'all-tasks' %}" class="btn btn-dark" type="button">My Tasks</a>
+    <a href="{% url 'user-management' %}" class="btn btn-secondary" type="button">Profil Seetings</a>
+    <a href="{% url 'contact' %}" class="btn btn-secondary" type="button">Support</a>
+    <a href="{% url 'pricing' %}" class="btn btn-success" type="button">Upgrade Plan</a>
 
 </div>
 {% endblock %}

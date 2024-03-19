@@ -1,0 +1,30 @@
+{% extends 'tasks/base.html' %} 
+{% load django_bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load crispy_forms_tags %}
+
+
+
+{% block head %} 
+<title>Task Heaven | Dashboard</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %} 
+
+{% block content %}
+{{navbar}}
+<div class="container-sm mb3 text-center">
+
+    <h2>Profile Management</h2>
+    <br>
+    <div class="container mb3 col-10  shadow-lg rounded-2">
+
+        <form class='form-control border border-0 col-3 p-4 ' method='POST' autocomplete='off'>
+            {% csrf_token %}
+            {{ ProfileForm|crispy }}
+            <button class="btn btn-success " type='submit'>Update Profil</button
+        </form>
+    </div>
+</div>
+{% endblock %}

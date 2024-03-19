@@ -1,0 +1,40 @@
+{% extends 'tasks/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block head %}
+<title>Task Heaven | Dashboard</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+{{ navbar }}
+<div class="container mb3 col-68 p-5 text-center" >
+    <h3>All my Tasks</h3>
+    <br>
+    <a href="{% url 'create' %}" class="btn btn-dark " type="button">Create a new Task</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary " type="button">Dashboard</a>
+    <hr>
+
+    {% for task in AllTasks %}
+    <br>
+    <div class="container mb3 bg-light col-8 p-5 shadow rounded-2 text-center">
+
+        <h5 class="text-secondary">{{ task.title }}</h5>
+        <br>
+        {{ task.content }}
+        <br>
+        <em>{{ task.date_created }}</em>
+        <hr>
+        <a href="{% url 'edit-task' task.id %}" class="btn btn-warning" type="button">Edit Task</a>
+        <a href="{% url 'delete-task' task.id %}" class="btn btn-danger" type="button">Delete Task</a>
+    
+    </div>
+
+    <br>
+    {% endfor %}
+</div>
+
+{% endblock %}

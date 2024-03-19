@@ -1,26 +1,25 @@
-{% extends 'tasks/base.html' %} 
+{% extends 'tasks/base.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% load crispy_forms_tags %}
 
-
-
-{% block head %} 
+{% block head %}
 <title>Task Heaven | Dashboard</title>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %} 
+{% endblock %}
 
 {% block content %}
-{{navbar}}
+{{ navbar }}
 
 <div class="container mb3 col-5 p-5 shadow rounded-2 text-center">
     <form class='form-control border border-0 col-3 p-5 ' method="POST" autocomplete="off">
         {% csrf_token %}
-        {{ CreateTaskForm|crispy}}
-        <button class="btn btn-success " type='submit'>Create task</button>
-        <a href="{% url 'dashboard' %}" class="btn btn-dark " type='button'>Cancel</a>
+        {{ EditTask|crispy}}
+        <button class="btn btn-success " type='submit'>Update task</button>
+        <a href="{% url 'all-tasks' %}" class="btn btn-secondary " type='button'>Cancel</a>
     </form>
 </div>
+
 {% endblock %}

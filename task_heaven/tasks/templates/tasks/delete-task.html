@@ -3,7 +3,6 @@
 {% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-{% load crispy_forms_tags %}
 
 
 
@@ -16,10 +15,11 @@
 {{navbar}}
 
 <div class="container mb3 col-5 p-5 shadow rounded-2 text-center">
-    <form class='form-control border border-0 col-3 p-5 ' method="POST" autocomplete="off">
+    <h3>Delete a Task</h3>
+    <p>Are you sure that you want to delete this task?</p>
+    <form class='form-control border border-0 col-3 p-3 ' method="POST" autocomplete="off">
         {% csrf_token %}
-        {{ CreateTaskForm|crispy}}
-        <button class="btn btn-success " type='submit'>Create task</button>
+        <button class="btn btn-danger " type='submit'>Delete</button>
         <a href="{% url 'dashboard' %}" class="btn btn-dark " type='button'>Cancel</a>
     </form>
 </div>
