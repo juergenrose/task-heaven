@@ -1,19 +1,19 @@
 from django.shortcuts import render, redirect
-from . forms import CreateUserForm, LoginForm, ContactForm, TaskForm
+from . forms import CreateUserForm, LoginForm, ContactForm, TaskForm, EditUserForm
 from django.contrib.auth.models import auth
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages 
-
+from . models import Task
 
 #website startpage
 def home(request):
     return render(request, 'tasks/index.html')
 
 
-#About page
-def about(request):
-    return render(request, 'tasks/about.html')
+#Features page
+def features(request):
+    return render(request, 'tasks/features.html')
 
 
 #user register (create) page, redirect to login and sends a message if the register is successful
@@ -86,7 +86,61 @@ def create_task(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
-            return redirect('dashboard')
+            return redirect('all-tasks')
     form = TaskForm()
     context = {'CreateTaskForm': form}
     return render(request, 'tasks/create.html', context)
+
+
+#my tasks page - shows all tasks
+@login_required(login_url='login')
+def all_tasks(request):
+    current_user = request.user.id
+    task = Task.objects.all().filter(user=current_user)
+    context = {'AllTasks': task}
+    return render(request, 'tasks/all-tasks.html', context)
+
+
+# edit tasks
+@login_required(login_url='login')
+def edit_task(request, pk):
+    try:
+        task = Task.objects.get(id=pk, user=request.user) # checks if current user is equals to the request 
+    except:
+        return redirect('all-tasks') #if not, user get redirected to all-tasks
+    
+    form = TaskForm(instance=task)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('all-tasks')
+    context = {'EditTask': form}
+    return render(request, 'tasks/edit-task.html', context)
+
+
+# delete task
+@login_required(login_url='login')
+def delete_task(request, pk):
+    try:
+        task = Task.objects.get(id=pk, user=request.user)
+    except:
+        return redirect('all-tasks')
+    if request.method == 'POST':
+        task.delete()
+        return redirect('all-tasks')
+    return render(request, 'tasks/delete-task.html')
+
+
+
+#user management page
+@login_required(login_url='login')
+def user_management(request):
+    form = EditUserForm(instance=request.user)
+    if request.method == 'POST':
+        form = EditUserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    context = {'ProfileForm': form}
+    return render(request, 'tasks/user-management.html', context)

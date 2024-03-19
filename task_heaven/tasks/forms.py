@@ -2,13 +2,14 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms.widgets import PasswordInput, TextInput, Textarea, EmailInput
+from django.forms import ModelForm
 from . models import Task
 
 
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2',]
 
     
 class LoginForm(AuthenticationForm):
@@ -22,7 +23,16 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=Textarea)
 
 
-class TaskForm(forms.Form):
+class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ['title', 'content',]
+        exclude = ['user',]
+
+
+class EditUserForm(forms.ModelForm):
+    password = None #doesen't update the password
+    class Meta:
+        model = User
+        fields = ['username', 'email',]
+        exclude = ['passeword1', 'password2']
