@@ -14,6 +14,7 @@
 {{ navbar }}
 
 <div class="container mb3 col-5 p-5 shadow rounded-2 text-center">
+    <h3>Update task</h3>
     <form class='form-control border border-0 col-3 p-5 ' method="POST" autocomplete="off">
         {% csrf_token %}
         {{ EditTask|crispy}}

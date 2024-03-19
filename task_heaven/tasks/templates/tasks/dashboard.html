@@ -18,10 +18,10 @@
 
     <h2>Dashboard</h2>
     <br>
-    <a href="{% url 'all-tasks' %}" class="btn btn-dark" type="button">My Tasks</a>
-    <a href="{% url 'user-management' %}" class="btn btn-secondary" type="button">Profil Seetings</a>
-    <a href="{% url 'contact' %}" class="btn btn-secondary" type="button">Support</a>
-    <a href="{% url 'pricing' %}" class="btn btn-success" type="button">Upgrade Plan</a>
-
+    <div class="btn-group" role="group">
+        <a  href="{% url 'all-tasks' %}" type="button" class="btn btn-secondary">My Tasks</a>
+        <a href="{% url 'user-management' %}" type="button" class="btn btn-dark">Profil Seetings</a>
+        <a href="{% url 'contact' %}" type="button" class="btn btn-secondary">Support</a>
+      </div>
 </div>
 {% endblock %}

@@ -11,16 +11,18 @@
 
 {% block content %}
 {{ navbar }}
-<div class="container mb3 col-68 p-5 text-center" >
-    <h3>All my Tasks</h3>
+<div class="container mb3 col-6 p-5 text-center" >
+    <h2>All my Tasks</h2>
     <br>
-    <a href="{% url 'create' %}" class="btn btn-dark " type="button">Create a new Task</a>
-    <a href="{% url 'dashboard' %}" class="btn btn-secondary " type="button">Dashboard</a>
+    <div class="btn-group" role="group">
+        <a  href="{% url 'create' %}" type="button" class="btn btn-dark ">Create a new Task</a>
+        <a href="{% url 'dashboard' %}" type="button" class="btn btn-secondary">Dashboard</a>
+    </div>
     <hr>
 
     {% for task in AllTasks %}
     <br>
-    <div class="container mb3 bg-light col-8 p-5 shadow rounded-2 text-center">
+    <div class="container mb3 bg-light col-10 p-5 shadow rounded-2 text-center">
 
         <h5 class="text-secondary">{{ task.title }}</h5>
         <br>
@@ -30,7 +32,7 @@
         <hr>
         <a href="{% url 'edit-task' task.id %}" class="btn btn-warning" type="button">Edit Task</a>
         <a href="{% url 'delete-task' task.id %}" class="btn btn-danger" type="button">Delete Task</a>
-    
+   
     </div>
 
     <br>

@@ -24,9 +24,6 @@
             <li class="nav-item justify-content:center ">
                 <a class="nav-link active" aria-current="page" href="{% url 'features' %}">Features</a>
             </li>
-            <li class="nav-item justify-content:center ">
-              <a class="btn btn-success navbar-btn" type="button"  href="{% url 'pricing' %}">Premium</a>
-            </li>
         </ul>     
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">    
@@ -39,8 +36,8 @@
       </div>
 </nav>
 
-<div class="container mb3 shadow-lg rounded-2">
-        <form class='form-control border border-0 col-3 p-4'  method='POST' autocomplete='off'>
+<div class="container mb3 col-4 shadow-lg rounded-2">
+        <form class='form-control border border-0 p-4'  method='POST' autocomplete='off'>
             {% csrf_token %}
             {{RegistrationForm|crispy}}
             <button class="btn btn-dark" type='submit'>Create account</button>
