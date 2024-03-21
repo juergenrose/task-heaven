@@ -1,20 +1,24 @@
 from django.shortcuts import render, redirect
-from . forms import CreateUserForm, LoginForm, ContactForm, TaskForm, EditUserForm
+from . forms import CreateUserForm, LoginForm, ContactForm, TaskForm, EditUserForm, UpdatePictureForm
 from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages 
-from . models import Task
+from . models import Task, Profile
+from django.core.mail import send_mail
+from django.conf import settings
 
 #website startpage
 def home(request):
     return render(request, 'tasks/index.html')
 
 
+
 #Features page
 def features(request):
     return render(request, 'tasks/features.html')
+
 
 
 #user register (create) page, redirect to login and sends a message if the register is successful
@@ -23,11 +27,15 @@ def register(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            current_user = form.save(commit=False)
             form.save()
+            send_mail("Welcome to Task Heaven!", "Congratulations, you successfully created your account", settings.DEFAULT_FROM_EMAIL, [current_user.email])
+            profile = Profile.objects.create(user=current_user)
             messages.success(request, "Account has been successfully created") #Shows the message when the register was successful
             return redirect('login')
     context = {'RegistrationForm' : form}
     return render(request, 'tasks/register.html', context)
+
 
 
 #user login page, if login was successfully, the user will redirect to the dashboard
@@ -53,9 +61,7 @@ def logout(request):
     return redirect('home')
 
 
-#the premium pricing page
-def pricing (request):
-    return render(request, 'tasks/pricing.html')
+
 
 
 #support form page
@@ -72,10 +78,14 @@ def contact(request):
     return render(request, 'tasks/contact.html', context)
 
 
+
 #the dashboard page
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'tasks/dashboard.html')
+    profile_pic = Profile.objects.get(user=request.user)
+    context = {'ProfilePic': profile_pic}
+    return render(request, 'tasks/dashboard.html', context)
+
 
 
 #create a Task
@@ -93,6 +103,7 @@ def create_task(request):
     return render(request, 'tasks/create.html', context)
 
 
+
 #my tasks page - shows all tasks
 @login_required(login_url='login')
 def all_tasks(request):
@@ -100,6 +111,7 @@ def all_tasks(request):
     task = Task.objects.all().filter(user=current_user)
     context = {'AllTasks': task}
     return render(request, 'tasks/all-tasks.html', context)
+
 
 
 # edit tasks
@@ -120,6 +132,7 @@ def edit_task(request, pk):
     return render(request, 'tasks/edit-task.html', context)
 
 
+
 # delete task
 @login_required(login_url='login')
 def delete_task(request, pk):
@@ -134,17 +147,25 @@ def delete_task(request, pk):
 
 
 
+
 #user management page
 @login_required(login_url='login')
 def user_management(request):
     form = EditUserForm(instance=request.user)
+    profile = Profile.objects.get(user=request.user)
+    form_2 = UpdatePictureForm(instance=profile)
     if request.method == 'POST':
         form = EditUserForm(request.POST, instance=request.user)
+        form_2 = UpdatePictureForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect('dashboard')
-    context = {'ProfileForm': form}
+        if form_2.is_valid():
+            form_2.save()
+            return redirect('dashboard')
+    context = {'UserUpdateForm': form, 'PictureUpdateForm': form_2}
     return render(request, 'tasks/user-management.html', context)
+
 
 
 #delete user account
