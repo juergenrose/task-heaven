@@ -43,7 +43,7 @@
 
 
 {% comment %} Login form {% endcomment %}
-<div class="container mb3 col-4 shadow-lg rounded-2">
+<div class="container p-4 col-5 mb3 border border-1 shadow-sm  border border-1  rounded-2">
 
     <form class='form-control border border-0 p-4' method='POST' autocomplete='off'>
         {% csrf_token %}
@@ -52,10 +52,20 @@
     </form>
 </div>
 
-<footer class='bg-dark text-center text-light p-4 shadow-lg mt-5'>
-    <p><b>Task Heaven</b></p>
-    <a class='link-light' href="https://github.com/juergenrose/task-heaven">Code on Github</a>
-  </footer>
+
+
+<div class="container-fluid">
+    <footer class="text-center bg-dark text-lg-start shadow-sm border border-1 mt-5 mb-1 rounded rounded-bottom-2   ">
+      <div class="container d-flex justify-content-center p-4 ">
+        <p ><b class="text-light h4">TASK Heaven</b> &nbsp; <sup class="text-light h6">A Heaven for your tasks</sup></p>
+        <br>
+      </div>
+      <div class="text-center p-2 bg-light">
+        <a class="text-dark" href="https://mdbootstrap.com/">Code on Github</a>
+      </div>
+    </footer>
+ </div
+
 
 <script>
     {% comment %} Script for the Message time {% endcomment %}

@@ -9,12 +9,13 @@
 
 {% block head %} 
 <title>Task Heaven | Features</title>
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %} 
 
 {% block content %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 p-2 shadow">
-    <a class="navbar-brand mb-0 h1 " href="{% url 'home'%}">Task Heaven</a>
+<div class="container-fluid">
+
+<nav class="navbar navbar-expand-lg navbar-light border border-1 mb-5 p-2 shadow-sm">
+    <a class="navbar-brand mb-0 h1 p-2" href="{% url 'home'%}"><b>TASK Heaven</b></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -39,7 +40,7 @@
 </nav>
 
 
-<div class="container mb3 col-8 p-5 shadow-lg rounded-2">
+<div class="container mb3 p-5 border border-1 shadow-sm rounded-2">
     <h2>Task Heaven - Features</h2>     
     <br>
     <h4>Task management</h4>
@@ -57,5 +58,19 @@
     <h4>Prioritization and categorization</h4>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         <br>Nulla porttitor massa id neque aliquam vestibulum. Vel quam elementum pulvinar etiam.</p>
+</div>
+
+<div class="container-fluid">
+    <footer class="text-center bg-dark text-lg-start shadow-sm border border-1 mt-5 mb-1 rounded rounded-bottom-2   ">
+      <div class="container d-flex justify-content-center p-4 ">
+        <p ><b class="text-light h4">TASK Heaven</b> &nbsp; <sup class="text-light h6">A Heaven for your tasks</sup></p>
+        <br>
+      </div>
+      <div class="text-center p-2 bg-light">
+        <a class="text-dark" href="https://mdbootstrap.com/">Code on Github</a>
+      </div>
+    </footer>
+ </div
+
 </div>
 {% endblock %}
