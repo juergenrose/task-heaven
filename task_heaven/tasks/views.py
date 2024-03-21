@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages 
 from . models import Task, Profile
 from django.core.mail import send_mail
@@ -176,3 +177,12 @@ def delete_account(request):
         deleteUser.delete()
         return redirect('home')
     return render(request, 'tasks/delete-account.html')
+
+
+
+#reset password
+@login_required(login_url='login')
+def PasswordResetView(request):
+    form = PasswordResetForm()
+    context = {'PasswordForm': form}
+    return render(request, 'tasks/password-reset.html', context)
