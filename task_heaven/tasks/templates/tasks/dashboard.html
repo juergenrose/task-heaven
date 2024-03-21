@@ -1,26 +1,30 @@
-{% extends 'tasks/base.html' %} 
+{% extends 'tasks/base.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% load crispy_forms_tags %}
 
-
-
 {% block head %} 
 <title>Task Heaven | Dashboard</title>
 {% endblock %} 
 
 {% block content %}
-{{navbar}}
-<div class="container mb3 col-8 p-5 text-center">
-
+{{ navbar }}
+<div class="container mb-3 col-6 p-4 border border-1 shadow-sm text-center">
     <h2>Dashboard</h2>
     <br>
+    <h4>Nice to see you, {{ user }}</h4>
+    <br> 
+    {% if ProfilePic.profile_pic.url %}
+    <img style="max-width: 100px; height: auto;" class="img-thumbnail rounded-circle mx-auto d-block" src="{{ ProfilePic.profile_pic.url }}">
+    <br>
+    {% endif %}
+    <hr>
     <div class="btn-group" role="group">
-        <a  href="{% url 'all-tasks' %}" type="button" class="btn btn-secondary">My Tasks</a>
-        <a href="{% url 'user-management' %}" type="button" class="btn btn-dark">Profil Seetings</a>
+        <a href="{% url 'all-tasks' %}" type="button" class="btn btn-secondary">My Tasks</a>
+        <a href="{% url 'user-management' %}" type="button" class="btn btn-dark">Profile Settings</a>
         <a href="{% url 'contact' %}" type="button" class="btn btn-secondary">Support</a>
-      </div>
+    </div>
 </div>
 {% endblock %}

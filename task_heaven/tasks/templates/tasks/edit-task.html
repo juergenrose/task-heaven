@@ -12,9 +12,9 @@
 {% block content %}
 {{ navbar }}
 
-<div class="container mb3 col-5 p-5 shadow rounded-2 text-center">
+<div class="container mb3 col-5 p-4 shadow-m border border-1 rounded-2 text-center">
     <h3>Update task</h3>
-    <form class='form-control border border-0 col-3 p-5 ' method="POST" autocomplete="off">
+    <form class='form-control border border-0' method="POST" autocomplete="off">
         {% csrf_token %}
         {{ EditTask|crispy}}
         <button class="btn btn-success " type='submit'>Update task</button>

@@ -15,14 +15,14 @@
 {{navbar}}
 
 
-<div class="container mb3 col-5 p-5 shadow rounded-2 text-center">
+<div class="container mb3 col-5 p-4 shadow-sm border border-1 rounded-2 text-center">
     <h3>Create a new task</h3>
 
-    <form class='form-control border border-0 col-3 p-5 ' method="POST" autocomplete="off">
+    <form class='form-control border border-0' method="POST" autocomplete="off">
         {% csrf_token %}
         {{ CreateTaskForm|crispy}}
-        <button class="btn btn-success " type='submit'>Create task</button>
-        <a href="{% url 'dashboard' %}" class="btn btn-dark " type='button'>Cancel</a>
+        <button class="btn btn-success mt-3 mb-0 " type='submit'>Create task</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-dark mt-3 mb-0 " type='button'>Cancel</a>
     </form>
 </div>
 
