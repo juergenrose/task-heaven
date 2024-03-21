@@ -8,30 +8,45 @@
 
 
 {% block head %} 
-<title>Task Heaven | Dashboard</title>
+<title>Task Heaven | Management</title>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %} 
 
 {% block content %}
 {{navbar}}
-<div class="container-sm mb3 text-center">
+<div class="container-sm mb-3 text-center">
 
-    <h2>Profile Management</h2>
+    <h2>User Management</h2>
     <br>
-    <div class="container mb3 col-6 shadow-lg rounded-2">
-
-        <form class='form-control border border-0 p-4 ' method='POST' autocomplete='off'>
+    <div class="container mb-3 col-6 border border-1 shadow-sm rounded-2 p-4">
+        <form class='form-control border border-0' method='POST' autocomplete='off'>
             <h3>Update your username or email</h3>
             <br>
             {% csrf_token %}
-            {{ ProfileForm|crispy }}
-            <button class="btn btn-success " type='submit'>Update Profile</button
+            {{ UserUpdateForm|crispy }}
+            <button class="btn btn-success mt-3" type='submit'>Update Profile</button
         </form>
-        <hr>
-        <h3>Delete your Account</h3>
         <br>
-        <a href="{% url 'delete-account' %}" class="btn btn-danger" type="button">Delete Account</a>
     </div>
+    <div class="container mb-3 col-6 border border-1 shadow-sm  rounded-2 p-4">
+        <br>
+        <form class='form-control' method='POST' autocomplete='off' enctype="multipart/from-data">
+            <h3>Update your Profile Picture</h3>
+            <br>
+            {% csrf_token %}
+            {{ PictureUpdateForm|crispy }}
+            <button class="btn btn-success mb-3 mt-3" type='submit'>Upload Picture</button
+        </form>
+        <br>
+    </div>
+    <div class="container mb-3 col-6 border border-1 shadow-sm  rounded-2 p-4">
+        <br>
+        <h3>Account settings</h3>
+        <br>
+        <a href="{% url 'reset_password' %}" class="btn btn-warning mb-3 mt-3">Reset Password</a>
+        <a href="{% url 'delete-account' %}" class="btn btn-danger mb-3 mt-3" type="button">Delete Account</a>
+    </div>
+    
 </div>
 
 {% endblock %}
