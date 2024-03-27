@@ -8,8 +8,9 @@ A Heaven for your tasks...
 
 ### Features:
 ```
-User auth
-CRUD function - Create, read, update or delete Tasks
+Registration, Login, Logout
+User Profile Management (delete account, reset password, change email and password, upload profile picture)
+CRUD function - Create, read, update or delete Task
 AWS and PostgreSQL DB
 ```
 
