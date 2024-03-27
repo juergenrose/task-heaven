@@ -6,7 +6,7 @@ A Heaven for your tasks...
 
 #### Its a simple ToDo or Task Manager
 
-###Features:
+### Features:
 ```
 User auth
 CRUD function - Create, read, update or delete Tasks
