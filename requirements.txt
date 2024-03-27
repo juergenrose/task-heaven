@@ -23,7 +23,7 @@ debugpy==1.8.1
 decorator==5.1.1
 defusedxml==0.7.1
 distlib==0.3.8
-Django==5.0.2
+Django==5.0.3
 django-bootstrap5==23.4
 django-crispy-forms==2.1
 django-environ==0.11.2
